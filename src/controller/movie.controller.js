@@ -1,6 +1,5 @@
 const Movie = require("../model/movie.schema");
 const movieService = require("../services/movie.service");
-// asdfasdfsadfsdaf
 const {
   errorResponseBody,
   successResponseBody,
@@ -61,7 +60,7 @@ const deleteMovie = async (req, res) => {
       return res.status(response.code).json({
         ...errorResponseBody,
         error: response.err,
-        message:"Failed to delete movie"
+        message: "Failed to delete movie",
       });
     }
     return res.status(200).json({

@@ -22,4 +22,5 @@ A RESTful API backend for a **Movie Booking Application** built with **Node.js**
 
 ---
 
+## 📁 Project Structure
 

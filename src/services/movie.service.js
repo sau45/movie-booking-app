@@ -1,29 +1,28 @@
-const Movie = require("../model/movie.schema");
+const { CustomError } = require("../middleware/errorHandler");
+const Movie = require("../model/movie.model");
 
 const createMovie = async (movieData) => {
   const createdMovie = await Movie.create(movieData);
-  if (!createdMovie)
-    return {
-      err: "Failed to create movie",
-      code: 400,
-    };
+  if (!createdMovie) {
+    throw new CustomError("Movie not created", 404);
+  }
   return createdMovie;
 };
 const getMovieById = async (id) => {
   const movie = await Movie.findById(id);
   if (!movie) {
-    return {
-      err: "Something wrong with id you provided",
-      code: 404,
-    };
+    throw new CustomError("Movie not fetched", 400);
   }
   return movie;
 };
 
 const deleteMovieById = async (id) => {
+  const existId = await Movie.findOne({ id });
+  if (!existId)
+    throw new CustomError("Movie not exist or deleted already", 404);
   const deletedMovie = await Movie.findByIdAndDelete(id);
   if (!deletedMovie)
-    return { err: "Something wrong with id you provided", code: 404 };
+    throw new CustomError("Something went wrong while deleting movie", 400);
   return deletedMovie;
 };
 

@@ -5,6 +5,7 @@ const MovieSchema = new mongoose.Schema(
     name: {
       type: String,
       required: true,
+      minLength: 2,
     },
     description: {
       type: String,
@@ -13,6 +14,7 @@ const MovieSchema = new mongoose.Schema(
     cast: {
       type: [String],
       require: true,
+      validate: (v) => v.length >= 2,
     },
     language: {
       type: String,

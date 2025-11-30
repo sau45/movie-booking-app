@@ -175,7 +175,7 @@ Handler     Errors        Errors      Logic      Errors
                             ↓
                     Formatted Response
 ```
-
+kk
 ### Error Types & Responses
 
 #### 1. **Zod Validation Errors (400)**

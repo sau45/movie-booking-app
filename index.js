@@ -4,6 +4,7 @@ const dontenv = require("dotenv");
 const connectDB = require("./src/config/db");
 dontenv.config();
 const MovieRoutes = require("./src/routes/route.movie");
+const UserRoutes = require("./src/routes/route.user");
 const { errorHandler, CustomError } = require("./src/middleware/errorHandler"); // ✅ Fixed!
 
 app.use(express.json());
@@ -11,6 +12,7 @@ app.use(express.urlencoded({ extended: true }));
 
 connectDB();
 
+UserRoutes(app);
 MovieRoutes(app);
 
 app.get("/", (req, res) => {

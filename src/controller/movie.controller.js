@@ -29,7 +29,7 @@ const deleteMovie = asyncHandler(async(req,res)=>{
   const deletedMovie = await movieService.deleteMovieById(req.params.id);
   return res.status(200).json({
     success:true,
-    deletedMovie:deletedMovie
+    data:deletedMovie
   })
 })
 

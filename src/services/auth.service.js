@@ -36,10 +36,13 @@ const login = async (userData) => {
     id: user._id,
     name: user.name,
     email: user.email,
+    role: user.role
   };
 
+  console.log("User details for token:", userDetails);
+
   const token = jwt.sign(
-    userDetails,          // Clean payload
+    userDetails,
     process.env.JWT_SECRET,
     { expiresIn: "1d" }
   );
@@ -51,4 +54,4 @@ const login = async (userData) => {
 };
 
 
-module.exports = { register,login };
+module.exports = { register, login };

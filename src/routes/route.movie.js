@@ -11,7 +11,7 @@ const routes = (app) => {
     validate(movieZodSchema),
     MovieController.createMovie
   );
-  app.get('/mba/api/v1/movies/:id', roleAuthorization(['admin']), authProtect, MovieController.getMovie)
+  app.get('/mba/api/v1/movies/:id', roleAuthorization(['admin', 'manager']), authProtect, MovieController.getMovie)
   app.delete('/mba/api/v1/movies/:id', roleAuthorization(['admin', 'manager']), authProtect, MovieController.deleteMovie)
 }
 

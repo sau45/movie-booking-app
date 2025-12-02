@@ -1,46 +1,122 @@
-Movie Booking App Backend (Node.js)
+# 🎬 Movie Booking App Backend
 
-A clean and professional backend with JWT authentication, role-based authorization, MongoDB, and modular architecture.
+A professional Node.js backend API with JWT authentication, role-based authorization, and MongoDB integration.
 
-Features:
-- JWT Login & Authentication
-- Role-Based Authorization (Admin/User)
-- Auth Protected Routes
-- CRUD for Movies
-- MongoDB + Mongoose
-- Central Error Handling
-- Modular Architecture
+---
 
-Project Structure:
+## ✨ Features
+
+- 🔐 **JWT Authentication** - Secure login system
+- 👥 **Role-Based Authorization** - Admin and User roles
+- 🛡️ **Protected Routes** - Auth middleware for sensitive endpoints
+- 🎥 **Movie Management** - Complete CRUD operations
+- 🗄️ **MongoDB Integration** - Mongoose ODM for data modeling
+- ⚠️ **Error Handling** - Centralized error management
+- 📦 **Modular Architecture** - Clean, scalable code structure
+
+---
+
+## 📁 Project Structure
+
+```
 src/
- ├── config/db.js
- ├── controllers/
- ├── middleware/
- │     ├── authProtect.js
- │     ├── roleAuthorization.js
- │     └── errorHandler.js
- ├── models/
- ├── routes/
- ├── services/
- ├── schemas/
- └── utils/asyncHandler.js
+ ├── 📂 config/
+ │    └── db.js
+ ├── 📂 controllers/
+ ├── 📂 middleware/
+ │    ├── authProtect.js
+ │    ├── roleAuthorization.js
+ │    └── errorHandler.js
+ ├── 📂 models/
+ ├── 📂 routes/
+ ├── 📂 services/
+ ├── 📂 schemas/
+ └── 📂 utils/
+      └── asyncHandler.js
 index.js
+```
 
-Movie Routes Table:
-GET /mba/api/v1/movies → Public
-GET /api/movies/:id → Public
-POST /mba/api/v1/movies → Admin only
-PUT /mba/api/v1/movies/:id → Admin only
-DELETE /mba/api/v1/movies/:id → Admin only
+---
 
-Example Protected Route:
-router.post("/movies", authProtect, roleAuthorization(["admin"]), createMovie);
+## 🛣️ API Endpoints
 
-Environment Variables (.env):
+| Method | Endpoint | Access | Description |
+|--------|----------|--------|-------------|
+| 🟢 GET | `/mba/api/v1/movies` | Public | Get all movies |
+| 🟢 GET | `/mba/api/v1/movies/:id` | Public | Get movie by ID |
+| 🔵 POST | `/mba/api/v1/movies` | 🔒 Admin | Create new movie |
+| 🟡 PUT | `/mba/api/v1/movies/:id` | 🔒 Admin | Update movie |
+| 🔴 DELETE | `/mba/api/v1/movies/:id` | 🔒 Admin | Delete movie |
+
+---
+
+## 🔒 Protected Route Example
+
+```javascript
+router.post(
+  "/movies",
+  authProtect,
+  roleAuthorization(["admin"]),
+  createMovie
+);
+```
+
+---
+
+## ⚙️ Environment Configuration
+
+Create a `.env` file in the root directory:
+
+```env
 PORT=8080
-MONGO_URI=your_mongo_uri
-JWT_SECRET=your_secret_key
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_secure_secret_key
+```
 
-Run Project:
+---
+
+## 🚀 Getting Started
+
+### Installation
+
+```bash
+# Install dependencies
 npm install
+```
+
+### Development
+
+```bash
+# Run in development mode
 npm run dev
+```
+
+### Production
+
+```bash
+# Start production server
+npm start
+```
+
+---
+
+## 🛠️ Tech Stack
+
+- **Runtime:** Node.js
+- **Framework:** Express.js
+- **Database:** MongoDB
+- **ODM:** Mongoose
+- **Authentication:** JWT (jsonwebtoken)
+- **Security:** bcrypt for password hashing
+
+---
+
+## 📝 License
+
+This project is licensed under the MIT License.
+
+---
+
+## 👨‍💻 Author
+
+Built with ❤️ for seamless movie booking management.

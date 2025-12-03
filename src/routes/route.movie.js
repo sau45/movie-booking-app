@@ -1,18 +1,31 @@
 const MovieController = require('../controller/movie.controller');
-const { authProtect } = require('../middleware/authHandler');
-const roleAuthorization = require('../middleware/roleHandler');
+// const  jwtRouteProtect  = require('../middleware/jwtRouteProtect');
+const sessionRouteProtect = require('../middleware/sessionRouteProtect');
+// const jwtRoleAuthorization = require('../middleware/jwtRoleHandler');
+const sessionRoleAuthorization = require('../middleware/sessionRoleHandler');
 const validate = require('../middleware/validateSchema');
 const movieZodSchema = require('../zodSchema/movie.schema');
 const routes = (app) => {
   app.post(
     "/mba/api/v1/movies",
-    authProtect,
-    roleAuthorization(['admin', 'manager']),
+    // jwtRouteProtect,
+    // jwtRoleAuthorization(['user', 'manager']),
+    sessionRouteProtect,
+    sessionRoleAuthorization(['admin', 'manager']),
     validate(movieZodSchema),
     MovieController.createMovie
   );
-  app.get('/mba/api/v1/movies/:id', roleAuthorization(['admin', 'manager']), authProtect, MovieController.getMovie)
-  app.delete('/mba/api/v1/movies/:id', roleAuthorization(['admin', 'manager']), authProtect, MovieController.deleteMovie)
+  app.get('/mba/api/v1/movies/:id',
+    // jwtRouteProtect, 
+    sessionRouteProtect,
+    MovieController.getMovie)
+  app.delete('/mba/api/v1/movies/:id',
+    // jwtRouteProtect, 
+    // jwtRoleAuthorization(['admin', 'manager']), 
+
+    sessionRouteProtect,
+    sessionRoleAuthorization(['admin', 'manager']),
+    MovieController.deleteMovie)
 }
 
 module.exports = routes

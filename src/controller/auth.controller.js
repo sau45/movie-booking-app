@@ -13,8 +13,8 @@ const register = asyncHandler(async (req, res) => {
 
 
 const login = asyncHandler(async(req,res)=>{
-  // console.log("req body in login",req.body)
-    const response = await authService.login(req.body);
+  console.log("req body in login",req.body)
+    const response = await authService.login(req.body,req);
     return res.status(200).json({
       success:true,
       data:response

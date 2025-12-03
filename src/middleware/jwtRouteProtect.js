@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 const asyncHandler = require('./asyncHandler');
-const authProtect = asyncHandler((req, res, next) => {
+const jwtRouteProtect = asyncHandler((req, res, next) => {
   const authHeader = req.headers.authorization;
   if (!authHeader || !authHeader.startsWith("Bearer ")) {
     return res.status(401).json({ message: "Unauthorized: No token provided" });
@@ -19,4 +19,4 @@ const authProtect = asyncHandler((req, res, next) => {
 
 });
 
-module.exports = { authProtect };
+module.exports = { jwtRouteProtect };

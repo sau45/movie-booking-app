@@ -23,7 +23,8 @@ const register = async (userData) => {
   };
 };
 
-const login = async (userData) => {
+const login = async (userData,req) => {
+  console.log("User data in service:", userData);
   const { email, password } = userData;
 
   const user = await User.findOne({ email });
@@ -41,16 +42,20 @@ const login = async (userData) => {
 
   console.log("User details for token:", userDetails);
 
-  const token = jwt.sign(
-    userDetails,
-    process.env.JWT_SECRET,
-    { expiresIn: "1d" }
-  );
+  // create session instead of JWT
+  req.session.user = userDetails;
+  return userDetails;
 
-  return {
-    token,
-    ...userDetails,
-  };
+  // const token = jwt.sign(
+  //   userDetails,
+  //   process.env.JWT_SECRET,
+  //   { expiresIn: "1d" }
+  // );
+
+  // return {
+  //   token,
+  //   ...userDetails,
+  // };
 };
 
 
